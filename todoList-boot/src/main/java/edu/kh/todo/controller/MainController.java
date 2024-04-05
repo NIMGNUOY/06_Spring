@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j			// log 객체 자동 생성 어노테이션
 public class MainController {
 	
-	// 유지, 보수에 용이 + 유연성
+	// 유지, 보수에 용이 + 유연성(인터페이스)
 	@Autowired	// DI (의존성 주입)
 	private TodoService service;
 	

@@ -302,6 +302,8 @@ changeComplete.addEventListener("click", () => {
         "todoNo" : todoNo
     }
 
+    console.log(param);
+
     fetch("/ajax/changeComplete", {
         method : "PUT",
         header : {"Content-type" : "application/json"},
@@ -320,6 +322,15 @@ changeComplete.addEventListener("click", () => {
         }
 
     })
+
+});
+
+// ------------------------------------------------------------------------------------------------------
+
+// 수정 버튼 클릭 시
+updateView.addEventListener("click", () => {
+   
+    
 
 });
 

@@ -316,7 +316,11 @@ changeComplete.addEventListener("click", () => {
         "todoNo" : todoNo
     }
 
+<<<<<<< HEAD
     // 비동기로 완료 여부 변경
+=======
+    console.log(param);
+>>>>>>> 24da8d638f082748be11ad3eb07cf64d3632ed0b
 
     fetch("/ajax/changeComplete", {
         method : "PUT",
@@ -350,6 +354,15 @@ changeComplete.addEventListener("click", () => {
         }
 
     })
+
+});
+
+// ------------------------------------------------------------------------------------------------------
+
+// 수정 버튼 클릭 시
+updateView.addEventListener("click", () => {
+   
+    
 
 });
 

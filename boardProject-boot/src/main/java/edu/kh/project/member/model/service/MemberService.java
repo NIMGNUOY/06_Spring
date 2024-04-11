@@ -11,4 +11,10 @@ public interface MemberService {
 	 */
 	Member login(Member inputMember);
 
+	/** 이메일 중복검사 서비스
+	 * @param memberEmail
+	 * @return
+	 */
+	int checkEmail(String memberEmail);
+
 }

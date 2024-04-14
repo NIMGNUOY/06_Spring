@@ -49,7 +49,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 
 @Configuration
-@PropertySource("classpath:/config.properties")
+@PropertySource("classpath:/config.properties")	// classpath:/ ==> src/main/resources/
 public class DBConfig {
 	
 	// 필드

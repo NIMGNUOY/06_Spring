@@ -88,3 +88,181 @@ if(loginForm != null) {
   });
 
 }
+
+
+/*
+const login1 = document.querySelector("#login1");
+const login2 = document.querySelector("#login2");
+
+login1.addEventListener("click", () => {
+
+  const email = login1.innerText;
+
+  fetch("/member/easyLogin?email=" + email)
+  .then(resp => resp.text())
+  .then(result => {
+
+    if(result == null) {
+      alert("로그인 실패");
+      return;
+    }
+
+    location.href = "/";
+
+  })
+
+})
+
+
+login2.addEventListener("click", () => {
+
+  const email = login2.innerText;
+
+  fetch("/member/easyLogin?email=" + email)
+  .then(resp => resp.text())
+  .then(result => {
+
+    if(result == null) {
+      alert("로그인 실패");
+      return;
+    }
+
+    location.href = "/";
+
+  })
+
+})
+*/
+
+// ==================================================================================
+
+// << 빠른 로그인 >>
+
+const quickLoginBtns = document.querySelectorAll(".quick-login");
+
+quickLoginBtns.forEach( (item, index) => {
+
+  // item : 현재 반복 시 꺼내온 객체
+  // index : 현재 반복 중인 인덱스
+
+  // quickLoginBtns 요소인 button 태그 하나씩 꺼내서 이벤트 리스너 추가
+  item.addEventListener("click", () => {
+
+    const email = item.innerText; // 버튼에 작성된 이메일 얻어오기
+
+    location.href = "/member/quickLogin?memberEmail=" + email;
+
+  })
+
+});
+
+// ======================================================================================
+
+// << 회원 목록 조회(비동기) >>
+
+
+const selectMemberList = document.querySelector("#selectMemberList");
+
+const memberList = document.querySelector("#memberList");
+
+// td 요소를 만들고 text 추가 후 반환
+const createTd = (text) => {
+
+  const td = document.createElement("td");
+  td.innerText = text;
+  return td;  // <td>text</td>
+
+}
+
+
+selectMemberList.addEventListener("click", e => {
+
+  fetch("/member/selectMemberList")
+  .then(resp => resp.text())
+  .then(result => {
+
+    // 이전 내용 삭제
+    memberList.innerHTML = "";
+
+    const list = JSON.parse(result);
+
+    console.log(list);
+
+    /* 내 답
+    for(let member of list) {
+
+      const tr = document.createElement("tr");
+      
+      const arr = ['memberNo', 'memberEmail', 'memberNickname', 'memberDelFl'];
+      
+      for(let key of arr) {
+
+        const td = document.createElement("td");
+
+        td.innerText = member[key];
+
+        tr.append(td);
+
+      }
+
+      memberList.append(tr);
+    }
+    */
+
+    // tbody 에 들어갈 요소를 만들고 값 세팅 후 추가
+    list.forEach( (member, index) => {
+      // member : 현재 반복 접근 중인 요소
+      // index : 현재 접근중인 인덱스
+
+      // tr 만들어서 그 안에 td 만들고, append 후
+      // tr 을 tbody 에 append
+
+      const keyList = ['memberNo', 'memberEmail', 'memberNickname', 'memberDelFl'];
+
+      const tr = document.createElement("tr");
+      // <tr></tr>
+      keyList.forEach( key => tr.append( createTd(member[key]) ) )
+
+      // tbody 자식으로 tr 추가
+      memberList.append(tr);
+
+    })
+
+  })
+
+
+});
+
+
+// =====================================================================================
+
+// << 특정 회원 비밀번호 초기화 >>
+
+const resetMemberNo = document.querySelector("#resetMemberNo");
+const resetPw = document.querySelector("#resetPw");
+
+resetPw.addEventListener("click", e => {
+
+  // 입력받은 회원번호 얻어오기
+  const inputNo = resetMemberNo.value;
+
+  if(inputNo.trim().length == 0) {
+    alert("회원 번호를 입력해주세요.")
+    return;
+  }
+
+  fetch("/member/resetPw?memberNo=" + inputNo)
+  .then(resp => resp.text())
+  .then(result => {
+    // result == 컨트롤러로부터 반환받아 TEXT 로 파싱한 값
+    // "1" or "0"
+
+    if(result > 0) {
+      alert("초기화 성공!")
+    } else {
+      alert("해당 회원이 존재하지 않습니다.")
+    }
+
+  });
+
+});

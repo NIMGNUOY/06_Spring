@@ -300,6 +300,7 @@ public class MyPageController {
 	
 	
 	/**	파일 목록 조회
+	 * (사이드 메뉴 a 링크 클릭 시)
 	 * @return
 	 */
 	@GetMapping("fileList")

@@ -45,6 +45,7 @@ public class BoardController {
 								 Model model) {
 		
 		log.debug("boardCode : " + boardCode);
+		log.debug("cp : " + cp);
 		
 		// 조회 서비스 호출 후 결과 반환
 		Map<String, Object> map = service.selectBoardList(boardCode, cp);

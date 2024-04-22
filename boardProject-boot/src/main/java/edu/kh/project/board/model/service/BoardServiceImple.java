@@ -54,7 +54,7 @@ public class BoardServiceImple implements BoardService{
 		 * --> 페이징 처리가 굉장히 간단해짐!
 		 * 
 		 */
-		int limit = pagination.getLimit();	// 10개
+		int limit = pagination.getLimit();	// 10개 만큼 조회
 		int offset = (cp - 1) * limit;	// offset 행 만큼 건너뜀
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		

@@ -47,11 +47,11 @@
   <nav>
     <ul>
       <th:block th:each="boardType : ${application.boardTypeList}">
-		<li>
-			<a th:text="${boardType.boardName}" 
-			th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}">게시판 이름</a>
-		</li>
-	  </th:block>
+        <li>
+          <a th:text="${boardType.boardName}" 
+          th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}">게시판 이름</a>
+        </li>
+      </th:block>
     </ul>
   </nav>
   

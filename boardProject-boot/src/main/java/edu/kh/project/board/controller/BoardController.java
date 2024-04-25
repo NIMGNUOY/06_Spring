@@ -150,6 +150,9 @@ public class BoardController {
 					
 					// 현재 글을 처음 읽은 경우
 					if(c.getValue().indexOf("[" + boardNo +"]") == -1 ) {
+						// indexOf("문자열") : 찾는 문자열의 인덱스 번호를 반환
+						//					  찾는 문자열이 없다면 -1 반환
+						
 						
 						// 해당 글 번호를 쿠키에 누적 + 서비스 호출
 						c.setValue(c.getValue() + "[" + boardNo + "]");
@@ -162,7 +165,7 @@ public class BoardController {
 				if(result > 0) {
 					
 					// 먼저 조회된 board 의 readCount 값을
-					// result 값으로 변환
+					// result 값으로 변환(재대입)
 					board.setReadCount(result);
 					
 					// 적용 경로 설정
@@ -179,7 +182,7 @@ public class BoardController {
 					// 다음날 자정까지 남은 시간 계산 (초 단위)
 					long secondsUntilNextDay = Duration.between(now, nextDayMidnight).getSeconds();
 					
-					// 쿠키 수명 설정
+					// 쿠키 수명 설정(초 단위) -> int 형으로만 가능
 					c.setMaxAge( (int) secondsUntilNextDay);
 					
 					resp.addCookie(c);	// 응답 객체를 이용해서 클라이언트에게 전달

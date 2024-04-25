@@ -51,6 +51,7 @@
                            th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"></i>
 
                         <!-- 좋아요 개수 -->
+                        <!-- js 에서 nextElementSibling.innerText 이용해서 값 바꿈 -->
                         <span th:text="${board.likeCount}">0</span>
                     </span>
 
@@ -143,6 +144,15 @@
 
 
     <th:block th:replace="~{common/footer}"></th:block>
+
+    <!-- 
+        - thymeleaf는 기본적으로 HTML 에 맞춰 렌더링하는게 기본 값
+
+        - <script></script>태그가 나올때, <script></script> 안에 있는 thymeleaf 문을 제대로 해석하지 못함
+          그래서 <script th:inline="javascript"> 으로 선언해줘서 <script></script> 안에 있는 
+          thymeleaf문을 제대로 해석할 수 있도록 함.
+
+     -->
 
     <script th:inline="javascript">
 

@@ -31,9 +31,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class BoardTypeInterceptor  implements HandlerInterceptor{
-	// HandlerInterceptor 인터페이스 내 3개의 메서드 모두 default, 즉 추상메서드 X
+	// HandlerInterceptor 인터페이스 내 3개의 메서드 모두 default, 즉 오버라이딩이 강제화되지 않음
 	
 	// BoardService 의존성 주입
+	// => Config 클래스에서 BoardTypeInterceptor 기본생성자 이용해야 하는데 @RequiredArgsConstructor 어노테이션을 사용하면
+	//	 매개변수 생성자밖에 만들지 못함 -> Config 클래스에서 기본생성자에 대한 적절할 객체화가 불가능하기 때문에
 	@Autowired
 	private BoardService service;
 	

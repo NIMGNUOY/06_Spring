@@ -59,7 +59,13 @@
 	
 	<!-- 게시판 종류 조회 -->
 	<select id="selectBoardTypeList">
-		
+		<!-- 컬럼명을 java 에서 사용할 수 있도록 별칭 등록 -->
+		<!-- 
+			DTO 에 값을 저장할 때만 myBatis 설정 적용 가능
+			DB의 UnderScore (_) 표기법 <-> Java의 Camel 표기법
+			두 표기법이 서로 변환 될 수 있도록 매핑하여
+			Java 필드명(memberId)과 DB 컬럼명(MEMBER_ID)가 서로 연결되게 함 
+		-->
 		SELECT BOARD_CODE "boardCode", BOARD_NAME "boardName"
 		FROM BOARD_TYPE
 		ORDER BY BOARD_CODE

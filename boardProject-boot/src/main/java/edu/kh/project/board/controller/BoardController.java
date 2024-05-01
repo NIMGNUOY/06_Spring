@@ -36,9 +36,11 @@ public class BoardController {
 	private final BoardService service;
 	
 	
-	/** 게시글 목록 조회
+	/** 게시글 목록 조회 + 검색(추가)
 	 * @param boardCode : 게시판 종류 구분 번호
 	 * @param cp : 현재 조회 요청한 페이지 번호 (없으면 1)
+	 * @param paramMap : 제출된 파라미터가 모두 저장된 Map
+	 * 					(검색 시 key, query 담겨 있음)
 	 * @return
 	 * 
 	 * 
@@ -55,17 +57,39 @@ public class BoardController {
 	@GetMapping("{boardCode:[0-9]+}")
 	public String selectBoardList(@PathVariable("boardCode") int boardCode,
 								 @RequestParam(value="cp", required = false, defaultValue = "1") int cp,
-								 Model model) {
+								 Model model,
+								 // 검색기능 (key, query)
+								 @RequestParam Map<String, Object> paramMap) {
 		
 		log.debug("boardCode : " + boardCode);
 		log.debug("cp : " + cp);
 		
-		// 조회 서비스 호출 후 결과 반환
-		Map<String, Object> map = service.selectBoardList(boardCode, cp);
-		// "pagination" , "boardList" 따로 실어주기 위해 Map
+		// 조회, 검색 서비스 호출 후 결과 반환
+		Map<String, Object> map = null;
+		
+		// 검색이 아닌 경우	--> paramMap 은 {} (빈 값)
+		if (paramMap.get("key") == null) {
+			
+			// 게시글 목록 조회 서비스 호출
+			map = service.selectBoardList(boardCode, cp);
+			// "pagination" , "boardList" 따로 실어주기 위해 Map
+			
+		} else {	// 검색인 경우 -> paramMap 은 {key=c, query= 검색내용}
+			
+			// boardCode 를 paramMap 에 추가
+			paramMap.put("boardCode", boardCode);
+			// -> paramMap 은 {key=c, query=검색내용, boardCode=1}
+			
+			// 검색 서비스 호출
+			map = service.searchList(paramMap, cp);
+			
+		}
+		
+		log.debug("map{}",map.get("boardList"));
 		
 		model.addAttribute("pagination", map.get("pagination"));
 		model.addAttribute("boardList", map.get("boardList"));
+		
 		
 		
 		return "board/boardList";	// boardList.html 로 forward

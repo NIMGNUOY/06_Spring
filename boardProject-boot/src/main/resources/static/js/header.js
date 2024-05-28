@@ -11,10 +11,13 @@
 function getCurrentDate() {
 
     const today = new Date();
+    console.log(today);
     const year = today.getFullYear();   // 2024
     const month = ('0' + (today.getMonth() + 1)).slice(-2);     // 05
     // slice(-2) 마지막 두자리 추출
     const day = ('0' + (today.getDate())).slice(-2);         // 24
+
+    // 주석: slice(-2)는 문자열의 마지막 두 자리를 추출
 
     // console.log("month : " + month);
     // console.log("day : " + day);
@@ -22,6 +25,8 @@ function getCurrentDate() {
     return `${year}${month}${day}`;
 
 }
+
+
 
 
 // 비동기 요청 1번째 함수
@@ -43,6 +48,8 @@ async function getServiceKey() {
         console.log("getServiceKey의 에러: " + err);
     }
 
+    // 이 경우, fetch 요청 중 네트워크 오류나 서버 오류가 발생하면 프로그램은 예외를 던지고, 이를 처리하지 않으면 프로그램이 중단됩니다.
+
 }
 
 
@@ -60,7 +67,7 @@ async function fetchData() {
 
     // URLSearchParams : URL의 query 문자열을 쉽게 다룰 수 있게 해주는 내장객체
     // 단, 사용 시 decode 서비스키 사용 -> URLSearchParams 이 데이터를 인코딩하기 때문
-    const queryParams = new URLSearchParams({
+    const queryParams = new URLSearchParams({   // 요청변수 필수값
 
         serviceKey : serviceKey,
         pageNo : 1,
@@ -81,6 +88,7 @@ async function fetchData() {
     try {
 
         const response = await fetch(`${url}?${queryParams}`);
+
         const result = await response.json();
 
         console.log(result);

@@ -11,11 +11,11 @@
 function getCurrentDate() {
 
     const today = new Date();
-    console.log(today);
+    console.log(today);     // Wed May 29 2024 21:36:48 GMT+0900 (한국 표준시)
     const year = today.getFullYear();   // 2024
-    const month = ('0' + (today.getMonth() + 1)).slice(-2);     // 05
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);     // 05 -> getMonth() 메서드는 0부터 11까지의 값을 반환하므로, 실제 월을 얻기 위해 1을 더합니다.
     // slice(-2) 마지막 두자리 추출
-    const day = ('0' + (today.getDate())).slice(-2);         // 24
+    const day = ('0' + (today.getDate())).slice(-2);         // 24 -> 일은 getDate()
 
     // 주석: slice(-2)는 문자열의 마지막 두 자리를 추출
 
@@ -89,7 +89,7 @@ async function fetchData() {
 
         const response = await fetch(`${url}?${queryParams}`);
 
-        const result = await response.json();
+        const result = await response.json();   // json 형태로 파싱
 
         console.log(result);
 
@@ -139,7 +139,7 @@ async function fetchData() {
             icon.className = 'fa-solid fa-cloud-rain';
         }
         // 하늘 정보
-        span.innerText = sky[obj.SKY];
+        span.innerText = sky[obj.SKY];  // [obj.SKY] == 1(맑음) or 3(구름많음) or 4(흐림)
         // 기온
         p1.innerText = `기온 : ${obj.TMP}℃`;
        

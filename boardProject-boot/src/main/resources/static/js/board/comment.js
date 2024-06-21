@@ -262,7 +262,7 @@ const showInsertComment = (parentCommentNo, btn) => {
   commentBtnArea.append(insertBtn, cancelBtn);
 
   // 답글 버튼 영역을 화면에 추가된 textarea 뒤쪽에 추가
-  textarea.after(commentBtnArea);
+  textarea.after(commentBtnArea); 
 } 
 
 

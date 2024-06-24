@@ -21,12 +21,14 @@ import edu.kh.project.member.model.dto.Member;
 import edu.kh.project.myPage.model.dto.UploadFile;
 import edu.kh.project.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 
 @SessionAttributes({"loginMember"})
 @Controller
 @RequestMapping("myPage")
 @RequiredArgsConstructor
+@Slf4j
 public class MyPageController {
 	
 	private final MyPageService service;
@@ -364,6 +366,8 @@ public class MyPageController {
 		// /myPage/profile/변경된파일명.확장자 형태의 문자열
 		// 현재 로그인한 회원의 PROFILE_IMG 컬럼값으로 수정(UPDATE)
 		int result = service.profile(profileImg, loginMember);
+		
+		log.info("프로필 이미지 : " + profileImg);
 		
 		String message = null;
 		
